@@ -1,0 +1,55 @@
+.help-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.help-header {
+  text-align: center;
+  margin-bottom: 3rem;
+
+  h1 {
+    color: #1976d2;
+    margin-bottom: 1rem;
+  }
+
+  p {
+    font-size: 1.2rem;
+    color: #666;
+  }
+}
+
+.help-content {
+  .help-card {
+    mat-card-header {
+      margin-bottom: 1rem;
+    }
+
+    mat-card-title {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: #1976d2;
+    }
+
+    mat-expansion-panel {
+      margin-bottom: 1rem;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      mat-panel-title {
+        font-weight: 500;
+        color: #333;
+      }
+
+      p {
+        line-height: 1.6;
+        color: #666;
+        margin: 0;
+        padding: 1rem 0;
+      }
+    }
+  }
+} 

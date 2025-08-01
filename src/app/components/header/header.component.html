@@ -1,0 +1,153 @@
+<mat-toolbar color="primary" class="header-toolbar">
+  <div class="toolbar-content">
+    <div class="logo-section">
+      <button mat-button class="logo-button" routerLink="/dashboard">
+        <mat-icon>school</mat-icon>
+        <span class="logo-text">Школа Знаний</span>
+      </button>
+    </div>
+
+    <!-- Desktop Navigation -->
+    <div class="navigation-section desktop-nav" *ngIf="isAuthenticated$ | async">
+      <button mat-button routerLink="/dashboard" routerLinkActive="active">
+        <mat-icon>dashboard</mat-icon>
+        Дашборд
+      </button>
+      <button mat-button routerLink="/courses" routerLinkActive="active">
+        <mat-icon>book</mat-icon>
+        Курсы
+      </button>
+      <button mat-button routerLink="/assignments" routerLinkActive="active">
+        <mat-icon>assignment</mat-icon>
+        Задания
+      </button>
+      <button mat-button routerLink="/lessons" routerLinkActive="active">
+        <mat-icon>class</mat-icon>
+        Уроки
+      </button>
+      <button mat-button routerLink="/books" routerLinkActive="active">
+        <mat-icon>library_books</mat-icon>
+        Книги
+      </button>
+      <button mat-button routerLink="/submissions" routerLinkActive="active" *ngIf="isTeacher$ | async">
+        <mat-icon>grade</mat-icon>
+        Отправки на проверку
+      </button>
+    </div>
+
+    <div class="user-section" *ngIf="isAuthenticated$ | async">
+      <!-- Desktop User Menu -->
+      <div class="desktop-user-menu">
+        <button mat-icon-button [matMenuTriggerFor]="userMenu" class="user-menu-button">
+          <mat-icon>account_circle</mat-icon>
+        </button>
+        
+        <mat-menu #userMenu="matMenu" class="user-menu">
+          <div class="user-info" *ngIf="currentUser$ | async as user">
+            <div class="user-name">{{ user.firstName }} {{ user.lastName }}</div>
+            <div class="user-email">{{ user.email }}</div>
+            <div class="user-role">{{ user.role }}</div>
+          </div>
+          
+          <mat-divider></mat-divider>
+          
+          <button mat-menu-item (click)="goToProfile()">
+            <mat-icon>person</mat-icon>
+            <span>Профиль</span>
+          </button>
+          
+          <button mat-menu-item (click)="goToDashboard()">
+            <mat-icon>dashboard</mat-icon>
+            <span>Дашборд</span>
+          </button>
+          
+          <button mat-menu-item (click)="goToCourses()">
+            <mat-icon>book</mat-icon>
+            <span>Курсы</span>
+          </button>
+          
+          <button mat-menu-item (click)="goToAssignments()">
+            <mat-icon>assignment</mat-icon>
+            <span>Задания</span>
+          </button>
+          
+          <mat-divider></mat-divider>
+          
+          <button mat-menu-item (click)="logout()">
+            <mat-icon>exit_to_app</mat-icon>
+            <span>Выйти</span>
+          </button>
+        </mat-menu>
+      </div>
+
+      <!-- Mobile Burger Menu -->
+      <div class="mobile-menu">
+        <button mat-icon-button (click)="toggleMobileMenu()" class="burger-button">
+          <mat-icon>{{ isMobileMenuOpen ? 'close' : 'menu' }}</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile Navigation Menu -->
+  <div class="mobile-nav" [class.open]="isMobileMenuOpen" *ngIf="isAuthenticated$ | async">
+    <div class="mobile-nav-content">
+      <div class="mobile-user-info" *ngIf="currentUser$ | async as user">
+        <mat-icon>account_circle</mat-icon>
+        <div class="mobile-user-details">
+          <div class="user-name">{{ user.firstName }} {{ user.lastName }}</div>
+          <div class="user-role">{{ user.role }}</div>
+        </div>
+      </div>
+      
+      <mat-divider></mat-divider>
+      
+      <div class="mobile-nav-links">
+        <button mat-button routerLink="/dashboard" routerLinkActive="active" (click)="closeMobileMenu()">
+          <mat-icon>dashboard</mat-icon>
+          <span>Дашборд</span>
+        </button>
+        
+        <button mat-button routerLink="/courses" routerLinkActive="active" (click)="closeMobileMenu()">
+          <mat-icon>book</mat-icon>
+          <span>Курсы</span>
+        </button>
+        
+        <button mat-button routerLink="/assignments" routerLinkActive="active" (click)="closeMobileMenu()">
+          <mat-icon>assignment</mat-icon>
+          <span>Задания</span>
+        </button>
+        
+        <button mat-button routerLink="/lessons" routerLinkActive="active" (click)="closeMobileMenu()">
+          <mat-icon>class</mat-icon>
+          <span>Уроки</span>
+        </button>
+        
+        <button mat-button routerLink="/books" routerLinkActive="active" (click)="closeMobileMenu()">
+          <mat-icon>library_books</mat-icon>
+          <span>Книги</span>
+        </button>
+        
+        <button mat-button routerLink="/submissions" routerLinkActive="active" *ngIf="isTeacher$ | async" (click)="closeMobileMenu()">
+          <mat-icon>grade</mat-icon>
+          <span>Отправки на проверку</span>
+        </button>
+        
+        <mat-divider></mat-divider>
+        
+        <button mat-button (click)="goToProfile(); closeMobileMenu()">
+          <mat-icon>person</mat-icon>
+          <span>Профиль</span>
+        </button>
+        
+        <button mat-button (click)="logout(); closeMobileMenu()">
+          <mat-icon>exit_to_app</mat-icon>
+          <span>Выйти</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Overlay for mobile menu -->
+  <div class="mobile-overlay" *ngIf="isMobileMenuOpen && (isAuthenticated$ | async)" (click)="onOverlayClick()"></div>
+</mat-toolbar> 

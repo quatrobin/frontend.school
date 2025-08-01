@@ -1,0 +1,44 @@
+<div class="submit-assignment-container">
+  <div *ngIf="loading" class="loading-container">
+    <mat-spinner></mat-spinner>
+    <p>Загрузка задания...</p>
+  </div>
+  <div *ngIf="!loading && assignment" class="submit-assignment">
+    <mat-card class="submit-card">
+      <mat-card-header>
+        <mat-card-title>Отправить задание</mat-card-title>
+        <mat-card-subtitle>{{ assignment.title }}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="assignment-info">
+          <p><strong>Курс:</strong> {{ assignment.courseName }}</p>
+          <p><strong>Срок сдачи:</strong> {{ assignment.dueDate | date:'dd.MM.yyyy' }}</p>
+          <p><strong>Максимальный балл:</strong> {{ assignment.maxScore }}</p>
+          <p *ngIf="assignment.description"><strong>Описание:</strong> {{ assignment.description }}</p>
+        </div>
+        <form [formGroup]="submissionForm" (ngSubmit)="onSubmit()">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Ответ</mat-label>
+            <textarea matInput formControlName="content" rows="6" placeholder="Введите ваш ответ на задание"></textarea>
+            <mat-error *ngIf="submissionForm.get('content')?.hasError('maxlength')">
+              Ответ не должен превышать 2000 символов
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Ссылка на файл</mat-label>
+            <input matInput formControlName="fileUrl" placeholder="Ссылка на файл (если есть)">
+            <mat-error *ngIf="submissionForm.get('fileUrl')?.hasError('maxlength')">
+              Ссылка не должна превышать 500 символов
+            </mat-error>
+          </mat-form-field>
+          <div class="form-actions">
+            <button mat-button type="button" (click)="onCancel()" [disabled]="submitting">Отмена</button>
+            <button mat-raised-button color="primary" type="submit" [disabled]="submitting">
+              {{ submitting ? 'Отправка...' : 'Отправить задание' }}
+            </button>
+          </div>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div> 

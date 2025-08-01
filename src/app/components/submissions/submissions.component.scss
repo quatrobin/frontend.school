@@ -1,0 +1,120 @@
+.submissions-container {
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 20px;
+}
+
+.header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.header-actions {
+  display: flex;
+  gap: 10px;
+}
+
+h2 {
+  font-size: 28px;
+  font-weight: 600;
+  color: #333;
+}
+
+.loading-container, .empty-message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 50px 20px;
+  text-align: center;
+  color: #666;
+}
+
+.loading-container mat-spinner {
+  margin-bottom: 16px;
+}
+
+.empty-message p {
+  margin-bottom: 16px;
+  font-size: 18px;
+}
+
+.submissions-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 20px;
+}
+
+.submission-card {
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+}
+
+mat-card-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+mat-card-subtitle {
+  color: #777;
+  margin-bottom: 16px;
+}
+
+.submission-info {
+  .content-preview {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 12px;
+    line-height: 1.4;
+  }
+  
+  .file-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: #3f51b5;
+    margin-bottom: 12px;
+    
+    mat-icon {
+      font-size: 18px;
+    }
+  }
+  
+  .status-info {
+    display: flex;
+    gap: 8px;
+    
+    mat-chip {
+      font-size: 12px;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .submissions-container {
+    padding: 10px;
+  }
+  
+  .header-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+  
+  h2 {
+    font-size: 24px;
+  }
+  
+  .submissions-list {
+    grid-template-columns: 1fr;
+  }
+} 

@@ -1,0 +1,49 @@
+<div class="support-container">
+  <div class="support-header">
+    <h1>Техническая поддержка</h1>
+    <p>Мы готовы помочь вам решить любые технические вопросы</p>
+  </div>
+
+  <div class="support-content">
+    <mat-card class="support-card">
+      <mat-card-header>
+        <mat-card-title>
+          <mat-icon>support_agent</mat-icon>
+          Контакты поддержки
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="support-info">
+          <div class="info-item">
+            <mat-icon>email</mat-icon>
+            <div>
+              <strong>Email:</strong>
+              <p>{{ supportInfo.email }}</p>
+            </div>
+          </div>
+          <div class="info-item">
+            <mat-icon>phone</mat-icon>
+            <div>
+              <strong>Телефон:</strong>
+              <p>{{ supportInfo.phone }}</p>
+            </div>
+          </div>
+          <div class="info-item">
+            <mat-icon>schedule</mat-icon>
+            <div>
+              <strong>Часы работы:</strong>
+              <p>{{ supportInfo.workingHours }}</p>
+            </div>
+          </div>
+          <div class="info-item">
+            <mat-icon>timer</mat-icon>
+            <div>
+              <strong>Время ответа:</strong>
+              <p>{{ supportInfo.responseTime }}</p>
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div> 

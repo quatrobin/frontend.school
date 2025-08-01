@@ -1,0 +1,56 @@
+<div class="contact-container">
+  <div class="contact-header">
+    <h1>Контакты</h1>
+    <p>Свяжитесь с нами любым удобным способом</p>
+  </div>
+
+  <div class="contact-content">
+    <mat-card class="contact-card">
+      <mat-card-header>
+        <mat-card-title>
+          <mat-icon>location_on</mat-icon>
+          Адрес
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p>{{ contactInfo.address }}</p>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="contact-card">
+      <mat-card-header>
+        <mat-card-title>
+          <mat-icon>phone</mat-icon>
+          Телефон
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p>{{ contactInfo.phone }}</p>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="contact-card">
+      <mat-card-header>
+        <mat-card-title>
+          <mat-icon>email</mat-icon>
+          Email
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p>{{ contactInfo.email }}</p>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="contact-card">
+      <mat-card-header>
+        <mat-card-title>
+          <mat-icon>schedule</mat-icon>
+          Часы работы
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p>{{ contactInfo.workingHours }}</p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div> 

@@ -1,0 +1,136 @@
+.footer {
+  background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+  color: white;
+  margin-top: auto;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+}
+
+.footer-section {
+  h3 {
+    color: #3498db;
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+  }
+
+  h4 {
+    color: #3498db;
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+  }
+
+  p {
+    margin-bottom: 15px;
+    line-height: 1.6;
+    color: #ecf0f1;
+  }
+}
+
+.social-links {
+  display: flex;
+  gap: 10px;
+  
+  button {
+    color: #ecf0f1;
+    
+    &:hover {
+      color: #3498db;
+    }
+  }
+}
+
+.contact-info {
+  .contact-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+    
+    mat-icon {
+      color: #3498db;
+      font-size: 20px;
+    }
+    
+    span {
+      color: #ecf0f1;
+      font-size: 14px;
+    }
+  }
+}
+
+.footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  
+  li {
+    margin-bottom: 8px;
+    
+    a {
+      color: #ecf0f1;
+      text-decoration: none;
+      transition: color 0.3s ease;
+      
+      &:hover {
+        color: #3498db;
+      }
+    }
+  }
+}
+
+.footer-bottom {
+  background: rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-bottom-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  
+  p {
+    margin: 0;
+    color: #bdc3c7;
+    font-size: 14px;
+  }
+}
+
+.footer-bottom-links {
+  display: flex;
+  gap: 20px;
+  
+  a {
+    color: #bdc3c7;
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.3s ease;
+    
+    &:hover {
+      color: #3498db;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .footer-content {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .footer-bottom-content {
+    flex-direction: column;
+    text-align: center;
+  }
+} 

@@ -1,0 +1,69 @@
+<div class="assignments-container">
+  <div class="assignments-header">
+    <h1>Мои задания</h1>
+    <button mat-raised-button color="primary" (click)="createAssignment()" *ngIf="isTeacher">
+      <mat-icon>add</mat-icon>
+      Создать задание
+    </button>
+  </div>
+
+  <div class="loading-container" *ngIf="loading">
+    <mat-spinner></mat-spinner>
+    <p>Загрузка заданий...</p>
+  </div>
+
+  <div class="assignments-grid" *ngIf="!loading">
+    <mat-card class="assignment-card" *ngFor="let assignment of assignments">
+      <mat-card-header>
+        <mat-card-title>{{ assignment.title }}</mat-card-title>
+        <mat-card-subtitle>
+          Курс: {{ assignment.courseName }}
+        </mat-card-subtitle>
+      </mat-card-header>
+      
+      <mat-card-content>
+        <p class="assignment-description">{{ assignment.description || 'Описание отсутствует' }}</p>
+        
+        <div class="assignment-stats">
+          <mat-chip [color]="getStatusClass(assignment) === 'completed' ? 'primary' : 'accent'" selected>
+            <mat-icon>assignment</mat-icon>
+            {{ getStatusText(assignment) }}
+          </mat-chip>
+          <mat-chip color="warn" selected>
+            <mat-icon>schedule</mat-icon>
+            Срок: {{ assignment.dueDate | date:'dd.MM.yyyy' }}
+          </mat-chip>
+        </div>
+        
+        <div class="assignment-meta">
+          <p><strong>Максимальный балл:</strong> {{ assignment.maxScore }}</p>
+          <p><strong>Создано:</strong> {{ assignment.createdAt | date:'dd.MM.yyyy' }}</p>
+          <p><strong>Обновлено:</strong> {{ assignment.updatedAt | date:'dd.MM.yyyy' }}</p>
+        </div>
+      </mat-card-content>
+      
+      <mat-card-actions>
+        <button mat-button (click)="goToAssignmentDetails(assignment.id)">
+          <mat-icon>visibility</mat-icon>
+          Подробнее
+        </button>
+        <button mat-raised-button color="primary" 
+                (click)="goToAssignmentDetails(assignment.id)">
+          <mat-icon>edit</mat-icon>
+          Выполнить
+        </button>
+        <button mat-raised-button color="accent" 
+                (click)="goToSubmissions(assignment.id)" *ngIf="isTeacher">
+          <mat-icon>list</mat-icon>
+          Отправки
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+
+  <div class="no-assignments" *ngIf="!loading && assignments.length === 0">
+    <mat-icon>assignment</mat-icon>
+    <h2>Задания не найдены</h2>
+    <p>У вас пока нет заданий.</p>
+  </div>
+</div> 

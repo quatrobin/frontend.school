@@ -1,0 +1,66 @@
+<div class="dashboard-container">
+  <div class="dashboard-header">
+    <h1 class="dashboard-title">Добро пожаловать в Школу Знаний!</h1>
+    <p class="dashboard-subtitle">Управляйте своими курсами и заданиями</p>
+  </div>
+
+  <div class="user-info">
+    <h3>Информация о пользователе</h3>
+    <div class="user-details">
+      <div class="user-detail">
+        <span class="user-detail-label">Email:</span>
+        <span class="user-detail-value">{{ currentUser?.email }}</span>
+      </div>
+      <div class="user-detail">
+        <span class="user-detail-label">Имя пользователя:</span>
+                        <span class="user-detail-value">{{ currentUser?.firstName }} {{ currentUser?.lastName }}</span>
+      </div>
+      <div class="user-detail">
+        <span class="user-detail-label">Роль:</span>
+        <span class="user-detail-value">{{ currentUser?.role }}</span>
+      </div>
+      <div class="user-detail">
+        <span class="user-detail-label">ID:</span>
+        <span class="user-detail-value">{{ currentUser?.id }}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="quick-actions">
+    <div class="action-card" (click)="goToCourses()">
+      <h3>Курсы</h3>
+      <p>Просматривайте и управляйте курсами. Создавайте новые курсы и отслеживайте прогресс студентов.</p>
+      <button mat-raised-button color="primary" class="action-button">
+        <mat-icon>book</mat-icon>
+        Перейти к курсам
+      </button>
+    </div>
+
+    <div class="action-card" (click)="goToAssignments()">
+      <h3>Задания</h3>
+      <p>Создавайте задания для студентов, проверяйте выполненные работы и выставляйте оценки.</p>
+      <button mat-raised-button color="primary" class="action-button">
+        <mat-icon>assignment</mat-icon>
+        Перейти к заданиям
+      </button>
+    </div>
+
+    <div class="action-card" (click)="goToBooks()">
+      <h3>Библиотека</h3>
+      <p>Управляйте литературой для курсов. Добавляйте книги и связывайте их с курсами.</p>
+      <button mat-raised-button color="primary" class="action-button">
+        <mat-icon>library_books</mat-icon>
+        Перейти к книгам
+      </button>
+    </div>
+
+    <div class="action-card" (click)="goToProfile()">
+      <h3>Профиль</h3>
+      <p>Управляйте своим профилем, изменяйте пароль и настройки аккаунта.</p>
+      <button mat-raised-button color="primary" class="action-button">
+        <mat-icon>person</mat-icon>
+        Перейти к профилю
+      </button>
+    </div>
+  </div>
+</div> 

@@ -1,0 +1,29 @@
+.layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main-content {
+  flex: 1;
+  padding: 20px;
+  margin-top: 64px; // Фиксированная высота шапки
+  
+  &.with-header {
+    padding-top: 20px; // Уменьшаем отступ, так как шапка теперь фиксированная
+  }
+  
+  &.with-footer {
+    padding-bottom: 20px; // Отступ для подвала
+  }
+}
+
+// Для страниц без авторизации (login, register)
+.main-content:not(.with-header):not(.with-footer) {
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0; // Убираем отступ для страниц без авторизации
+} 

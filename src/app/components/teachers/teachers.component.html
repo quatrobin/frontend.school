@@ -1,0 +1,35 @@
+<div class="teachers-container">
+  <div class="teachers-header">
+    <h1>Наши преподаватели</h1>
+    <p>Познакомьтесь с опытными преподавателями нашей школы</p>
+  </div>
+
+  <div *ngIf="loading" class="loading-container">
+    <mat-spinner></mat-spinner>
+    <p>Загрузка преподавателей...</p>
+  </div>
+
+  <div *ngIf="!loading && teachers.length === 0" class="empty-message">
+    <p>Преподаватели не найдены</p>
+  </div>
+
+  <div *ngIf="!loading && teachers.length > 0" class="teachers-grid">
+    <mat-card *ngFor="let teacher of teachers" class="teacher-card">
+      <mat-card-header>
+        <mat-card-title>
+          <mat-icon>person</mat-icon>
+          {{ teacher.firstName }} {{ teacher.lastName }}
+        </mat-card-title>
+        <mat-card-subtitle>{{ teacher.email }}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="teacher-info">
+          <mat-chip color="primary" selected>
+            <mat-icon>school</mat-icon>
+            {{ teacher.role }}
+          </mat-chip>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div> 

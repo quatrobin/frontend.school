@@ -1,0 +1,72 @@
+<div class="submissions-container">
+  <div class="header-row">
+    <h2>Отправки на проверку</h2>
+    <div class="header-actions">
+      <button mat-raised-button color="primary" (click)="goToAssignments()" *ngIf="isTeacher && !currentAssignmentId">
+        <mat-icon>assignment</mat-icon>
+        Выбрать задание
+      </button>
+      <button mat-raised-button color="secondary" (click)="goToAssignments()" *ngIf="isTeacher && currentAssignmentId">
+        <mat-icon>arrow_back</mat-icon>
+        Назад к заданиям
+      </button>
+    </div>
+  </div>
+  
+  <div *ngIf="loading" class="loading-container">
+    <mat-spinner></mat-spinner>
+    <p>Загрузка отправок...</p>
+  </div>
+  
+  <div *ngIf="!loading && submissions.length === 0 && isTeacher && !currentAssignmentId" class="empty-message">
+    <p>Выберите задание для просмотра отправок на проверку</p>
+    <button mat-raised-button color="primary" (click)="goToAssignments()">
+      Перейти к заданиям
+    </button>
+  </div>
+  
+  <div *ngIf="!loading && submissions.length === 0 && isTeacher && currentAssignmentId" class="empty-message">
+    <p>Пока нет отправок для этого задания</p>
+    <button mat-raised-button color="primary" (click)="goToAssignments()">
+      Перейти к заданиям
+    </button>
+  </div>
+  
+  <div *ngIf="!loading && submissions.length === 0 && isStudent" class="empty-message">
+    <p>У вас пока нет отправленных заданий</p>
+    <button mat-raised-button color="primary" (click)="goToAssignments()">
+      Перейти к заданиям
+    </button>
+  </div>
+  
+  <div *ngIf="!loading && submissions.length > 0" class="submissions-list">
+    <mat-card *ngFor="let submission of submissions" class="submission-card" (click)="goToSubmissionDetails(submission.id)">
+      <mat-card-title>{{ submission.assignmentTitle }}</mat-card-title>
+      <mat-card-subtitle>
+        <span *ngIf="isTeacher">Студент: {{ submission.studentName }}</span>
+        <span *ngIf="isStudent">Отправлено: {{ submission.submittedAt | date:'dd.MM.yyyy HH:mm' }}</span>
+      </mat-card-subtitle>
+      <mat-card-content>
+        <div class="submission-info">
+          <div *ngIf="submission.content" class="content-preview">
+            {{ submission.content.length > 100 ? (submission.content | slice:0:100) + '...' : submission.content }}
+          </div>
+          <div *ngIf="submission.fileUrl" class="file-info">
+            <mat-icon>attach_file</mat-icon>
+            <span>Прикреплен файл</span>
+          </div>
+          <div class="status-info">
+            <mat-chip *ngIf="submission.isGraded" color="primary" selected>
+              <mat-icon>grade</mat-icon>
+              Оценено: {{ submission.score }}/100
+            </mat-chip>
+            <mat-chip *ngIf="!submission.isGraded" color="accent" selected>
+              <mat-icon>pending</mat-icon>
+              Ожидает оценки
+            </mat-chip>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div> 

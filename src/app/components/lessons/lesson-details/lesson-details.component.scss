@@ -1,0 +1,75 @@
+.lesson-details-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 50px 20px;
+  text-align: center;
+  color: #666;
+}
+.loading-container mat-spinner {
+  margin-bottom: 16px;
+}
+.lesson-details {
+  .lesson-card {
+    padding: 24px;
+  }
+  mat-card-header {
+    margin-bottom: 24px;
+  }
+  mat-card-title {
+    font-size: 28px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 8px;
+  }
+  mat-card-subtitle {
+    color: #666;
+    font-size: 18px;
+  }
+  .lesson-info {
+    margin-bottom: 32px;
+  }
+  .info-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+    font-size: 16px;
+    color: #555;
+    mat-icon {
+      color: #3f51b5;
+      font-size: 20px;
+    }
+  }
+  .lesson-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 24px;
+    border-top: 1px solid #eee;
+  }
+}
+@media (max-width: 768px) {
+  .lesson-details-container {
+    padding: 16px;
+  }
+  .lesson-details {
+    .lesson-card {
+      padding: 16px;
+    }
+    mat-card-title {
+      font-size: 24px;
+    }
+    .lesson-actions {
+      flex-direction: column;
+      gap: 16px;
+      align-items: stretch;
+    }
+  }
+} 

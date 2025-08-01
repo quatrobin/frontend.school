@@ -1,0 +1,36 @@
+<div class="news-container">
+  <div class="news-header">
+    <h1>Новости</h1>
+    <p>Будьте в курсе последних событий нашей школы</p>
+  </div>
+
+  <div *ngIf="loading" class="loading-container">
+    <mat-spinner></mat-spinner>
+    <p>Загрузка новостей...</p>
+  </div>
+
+  <div *ngIf="!loading && news.length === 0" class="empty-message">
+    <p>Новости не найдены</p>
+  </div>
+
+  <div *ngIf="!loading && news.length > 0" class="news-grid">
+    <mat-card *ngFor="let item of news" class="news-card">
+      <mat-card-header>
+        <mat-card-title>{{ item.title }}</mat-card-title>
+        <mat-card-subtitle>
+          <mat-icon>schedule</mat-icon>
+          {{ item.date | date:'dd.MM.yyyy' }}
+        </mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <p>{{ item.content }}</p>
+        <div class="news-category">
+          <mat-chip color="accent" selected>
+            <mat-icon>label</mat-icon>
+            {{ item.category }}
+          </mat-chip>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div> 

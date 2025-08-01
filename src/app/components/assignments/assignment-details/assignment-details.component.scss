@@ -1,0 +1,131 @@
+.assignment-details-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+}
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  text-align: center;
+}
+.loading-container p {
+  margin-top: 16px;
+  color: #666;
+}
+.assignment-details-content {
+  min-height: 400px;
+}
+.assignment-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #eee;
+}
+.back-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.teacher-actions {
+  display: flex;
+  gap: 12px;
+}
+.assignment-card {
+  padding: 24px;
+}
+.assignment-title {
+  font-size: 28px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 8px;
+}
+.assignment-course {
+  font-size: 18px;
+  color: #666;
+  margin-bottom: 24px;
+}
+.assignment-info {
+  margin-top: 24px;
+}
+.assignment-description {
+  margin-bottom: 32px;
+}
+.assignment-description h3 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 12px;
+}
+.assignment-description p {
+  color: #666;
+  line-height: 1.6;
+  font-size: 16px;
+}
+.assignment-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+.meta-section {
+  border: 1px solid #eee;
+  border-radius: 8px;
+  padding: 20px;
+  background-color: #fafafa;
+}
+.meta-section h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 16px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #ddd;
+}
+.meta-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+}
+.meta-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+}
+.meta-label {
+  font-weight: 500;
+  color: #555;
+  min-width: 100px;
+}
+.meta-value {
+  color: #333;
+  font-weight: 400;
+}
+@media (max-width: 768px) {
+  .assignment-details-container {
+    padding: 16px;
+  }
+  .assignment-header {
+    flex-direction: column;
+    gap: 16px;
+    align-items: stretch;
+  }
+  .teacher-actions {
+    justify-content: center;
+  }
+  .meta-grid {
+    grid-template-columns: 1fr;
+  }
+  .meta-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+  .assignment-title {
+    font-size: 24px;
+  }
+} 

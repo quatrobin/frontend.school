@@ -1,0 +1,83 @@
+<div class="edit-lesson-container">
+  <mat-card class="edit-lesson-card">
+    <mat-card-header>
+      <mat-card-title>Редактировать урок</mat-card-title>
+      <mat-card-subtitle>Измените информацию об уроке</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <div *ngIf="loading" class="loading-container">
+        <mat-spinner></mat-spinner>
+        <p>Загрузка урока...</p>
+      </div>
+      <form *ngIf="!loading" [formGroup]="lessonForm" (ngSubmit)="onSubmit()">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Название урока *</mat-label>
+          <input matInput formControlName="title" placeholder="Введите название урока">
+          <mat-error *ngIf="lessonForm.get('title')?.hasError('required')">
+            Название урока обязательно
+          </mat-error>
+          <mat-error *ngIf="lessonForm.get('title')?.hasError('maxlength')">
+            Название не должно превышать 100 символов
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Описание</mat-label>
+          <textarea matInput formControlName="description" rows="3" placeholder="Введите описание урока"></textarea>
+          <mat-error *ngIf="lessonForm.get('description')?.hasError('maxlength')">
+            Описание не должно превышать 1000 символов
+          </mat-error>
+        </mat-form-field>
+        
+        <div class="form-row" *ngIf="!loadingCourses">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Курс *</mat-label>
+            <mat-select formControlName="courseId" placeholder="Выберите курс">
+              <mat-option *ngFor="let course of courses" [value]="course.id">
+                {{ course.name }}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="lessonForm.get('courseId')?.hasError('required')">
+              Курс обязателен
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div *ngIf="loadingCourses" class="loading-courses">
+          <mat-spinner diameter="20"></mat-spinner>
+          <span>Загрузка курсов...</span>
+        </div>
+        
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Дата урока *</mat-label>
+          <input matInput type="date" formControlName="lessonDate">
+          <mat-error *ngIf="lessonForm.get('lessonDate')?.hasError('required')">
+            Дата урока обязательна
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Длительность (мин) *</mat-label>
+          <input matInput type="number" formControlName="durationMinutes" placeholder="Введите длительность">
+          <mat-error *ngIf="lessonForm.get('durationMinutes')?.hasError('required')">
+            Длительность обязательна
+          </mat-error>
+          <mat-error *ngIf="lessonForm.get('durationMinutes')?.hasError('min') || lessonForm.get('durationMinutes')?.hasError('max')">
+            Длительность должна быть от 15 до 480 минут
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Материалы</mat-label>
+          <input matInput formControlName="materials" placeholder="Ссылки или описание материалов">
+          <mat-error *ngIf="lessonForm.get('materials')?.hasError('maxlength')">
+            Материалы не должны превышать 500 символов
+          </mat-error>
+        </mat-form-field>
+        <div class="form-actions">
+          <button mat-button type="button" (click)="onCancel()" [disabled]="submitting">Отмена</button>
+          <button mat-raised-button color="primary" type="submit" [disabled]="lessonForm.invalid || submitting">
+            {{ submitting ? 'Обновление...' : 'Обновить урок' }}
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div> 

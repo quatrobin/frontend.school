@@ -1,0 +1,65 @@
+<div class="assignment-details-container">
+  <div *ngIf="loading" class="loading-container">
+    <mat-spinner></mat-spinner>
+    <p>Загрузка задания...</p>
+  </div>
+  <div *ngIf="!loading && assignment" class="assignment-details-content">
+    <div class="assignment-header">
+      <button mat-button (click)="goBack()" class="back-button">
+        <mat-icon>arrow_back</mat-icon>
+        Назад к списку
+      </button>
+      <div class="assignment-actions">
+        <div *ngIf="isTeacher" class="teacher-actions">
+          <button mat-raised-button color="accent" (click)="editAssignment()">
+            <mat-icon>edit</mat-icon>
+            Редактировать
+          </button>
+        </div>
+        <div *ngIf="isStudent" class="student-actions">
+          <button mat-raised-button color="primary" (click)="submitAssignment()">
+            <mat-icon>send</mat-icon>
+            Отправить задание
+          </button>
+        </div>
+      </div>
+    </div>
+    <mat-card class="assignment-card">
+      <mat-card-header>
+        <mat-card-title class="assignment-title">{{ assignment.title }}</mat-card-title>
+        <mat-card-subtitle class="assignment-course">Курс: {{ assignment.courseName }}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="assignment-info">
+          <div *ngIf="assignment.description" class="assignment-description">
+            <h3>Описание</h3>
+            <p>{{ assignment.description }}</p>
+          </div>
+          <div class="assignment-meta">
+            <div class="meta-section">
+              <h3>Детали</h3>
+              <div class="meta-grid">
+                <div class="meta-item">
+                  <span class="meta-label">Срок сдачи:</span>
+                  <span class="meta-value">{{ assignment.dueDate | date:'dd.MM.yyyy' }}</span>
+                </div>
+                <div class="meta-item">
+                  <span class="meta-label">Максимальный балл:</span>
+                  <span class="meta-value">{{ assignment.maxScore }}</span>
+                </div>
+                <div class="meta-item">
+                  <span class="meta-label">Создано:</span>
+                  <span class="meta-value">{{ assignment.createdAt | date:'dd.MM.yyyy' }}</span>
+                </div>
+                <div class="meta-item">
+                  <span class="meta-label">Обновлено:</span>
+                  <span class="meta-value">{{ assignment.updatedAt | date:'dd.MM.yyyy' }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div> 

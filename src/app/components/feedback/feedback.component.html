@@ -1,0 +1,67 @@
+<div class="feedback-container">
+  <div class="feedback-header">
+    <h1>Обратная связь</h1>
+    <p>Мы ценим ваше мнение и готовы к диалогу</p>
+  </div>
+
+  <div class="feedback-content">
+    <mat-card class="feedback-card">
+      <mat-card-header>
+        <mat-card-title>
+          <mat-icon>feedback</mat-icon>
+          Отправить сообщение
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <form [formGroup]="feedbackForm" (ngSubmit)="onSubmit()">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Ваше имя</mat-label>
+            <input matInput formControlName="name" type="text">
+            <mat-error *ngIf="feedbackForm.get('name')?.hasError('required')">
+              Имя обязательно
+            </mat-error>
+            <mat-error *ngIf="feedbackForm.get('name')?.hasError('minlength')">
+              Имя должно содержать минимум 2 символа
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Email</mat-label>
+            <input matInput formControlName="email" type="email">
+            <mat-error *ngIf="feedbackForm.get('email')?.hasError('required')">
+              Email обязателен
+            </mat-error>
+            <mat-error *ngIf="feedbackForm.get('email')?.hasError('email')">
+              Введите корректный email
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Тема</mat-label>
+            <input matInput formControlName="subject" type="text">
+            <mat-error *ngIf="feedbackForm.get('subject')?.hasError('required')">
+              Тема обязательна
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Сообщение</mat-label>
+            <textarea matInput formControlName="message" rows="5"></textarea>
+            <mat-error *ngIf="feedbackForm.get('message')?.hasError('required')">
+              Сообщение обязательно
+            </mat-error>
+            <mat-error *ngIf="feedbackForm.get('message')?.hasError('minlength')">
+              Сообщение должно содержать минимум 10 символов
+            </mat-error>
+          </mat-form-field>
+
+          <button mat-raised-button color="primary" type="submit" 
+                  [disabled]="feedbackForm.invalid || loading" class="full-width">
+            <mat-icon>send</mat-icon>
+            {{ loading ? 'Отправка...' : 'Отправить сообщение' }}
+          </button>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div> 

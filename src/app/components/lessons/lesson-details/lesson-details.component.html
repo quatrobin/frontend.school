@@ -1,0 +1,44 @@
+<div class="lesson-details-container">
+  <div *ngIf="loading" class="loading-container">
+    <mat-spinner></mat-spinner>
+    <p>Загрузка урока...</p>
+  </div>
+  <div *ngIf="!loading && lesson" class="lesson-details">
+    <mat-card class="lesson-card">
+      <mat-card-header>
+        <mat-card-title>{{ lesson.title }}</mat-card-title>
+        <mat-card-subtitle>Курс: {{ lesson.courseName }}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="lesson-info">
+          <div class="info-row">
+            <mat-icon>event</mat-icon>
+            <span>Дата: {{ lesson.lessonDate | date:'dd.MM.yyyy' }}</span>
+          </div>
+          <div class="info-row">
+            <mat-icon>schedule</mat-icon>
+            <span>Длительность: {{ lesson.durationMinutes }} минут</span>
+          </div>
+          <div *ngIf="lesson.description" class="info-row">
+            <mat-icon>description</mat-icon>
+            <span>Описание: {{ lesson.description }}</span>
+          </div>
+          <div *ngIf="lesson.materials" class="info-row">
+            <mat-icon>menu_book</mat-icon>
+            <span>Материалы: {{ lesson.materials }}</span>
+          </div>
+        </div>
+        <div class="lesson-actions">
+          <button mat-button (click)="goBack()">
+            <mat-icon>arrow_back</mat-icon>
+            Назад
+          </button>
+          <button *ngIf="isTeacher" mat-raised-button color="primary" (click)="editLesson()">
+            <mat-icon>edit</mat-icon>
+            Редактировать
+          </button>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div> 

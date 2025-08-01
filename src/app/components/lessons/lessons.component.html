@@ -1,0 +1,32 @@
+<div class="lessons-container">
+  <div class="lessons-header">
+    <h1>Уроки</h1>
+    <button mat-raised-button color="primary" (click)="createLesson()" *ngIf="isTeacher">
+      <mat-icon>add</mat-icon>
+      Создать урок
+    </button>
+  </div>
+
+  <div class="loading-container" *ngIf="loading">
+    <mat-spinner></mat-spinner>
+    <p>Загрузка уроков...</p>
+  </div>
+
+  <div class="lessons-grid" *ngIf="!loading && lessons.length > 0">
+    <mat-card *ngFor="let lesson of lessons" class="lesson-card" (click)="goToLessonDetails(lesson.id)">
+      <mat-card-header>
+        <mat-card-title>{{ lesson.title }}</mat-card-title>
+        <mat-card-subtitle>{{ lesson.lessonDate | date:'dd.MM.yyyy' }}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <p class="lesson-description">{{ lesson.description || 'Описание отсутствует' }}</p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <div class="no-lessons" *ngIf="!loading && lessons.length === 0">
+    <mat-icon>class</mat-icon>
+    <h2>Уроки не найдены</h2>
+    <p>Пока нет доступных уроков.</p>
+  </div>
+</div> 

@@ -1,0 +1,72 @@
+<div class="create-assignment-container">
+  <mat-card class="create-assignment-card">
+    <mat-card-header>
+      <mat-card-title>Создать новое задание</mat-card-title>
+      <mat-card-subtitle>Заполните информацию о задании</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <form [formGroup]="assignmentForm" (ngSubmit)="onSubmit()">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Название задания *</mat-label>
+          <input matInput formControlName="title" placeholder="Введите название задания">
+          <mat-error *ngIf="assignmentForm.get('title')?.hasError('required')">
+            Название задания обязательно
+          </mat-error>
+          <mat-error *ngIf="assignmentForm.get('title')?.hasError('maxlength')">
+            Название не должно превышать 100 символов
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Описание</mat-label>
+          <textarea matInput formControlName="description" rows="3" placeholder="Введите описание задания"></textarea>
+          <mat-error *ngIf="assignmentForm.get('description')?.hasError('maxlength')">
+            Описание не должно превышать 1000 символов
+          </mat-error>
+        </mat-form-field>
+        
+        <div class="form-row" *ngIf="!loadingCourses">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Курс *</mat-label>
+            <mat-select formControlName="courseId" placeholder="Выберите курс">
+              <mat-option *ngFor="let course of courses" [value]="course.id">
+                {{ course.name }}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="assignmentForm.get('courseId')?.hasError('required')">
+              Курс обязателен
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div *ngIf="loadingCourses" class="loading-courses">
+          <mat-spinner diameter="20"></mat-spinner>
+          <span>Загрузка курсов...</span>
+        </div>
+        
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Срок сдачи *</mat-label>
+          <input matInput type="date" formControlName="dueDate">
+          <mat-error *ngIf="assignmentForm.get('dueDate')?.hasError('required')">
+            Срок сдачи обязателен
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Максимальный балл *</mat-label>
+          <input matInput type="number" formControlName="maxScore" placeholder="Введите максимальный балл">
+          <mat-error *ngIf="assignmentForm.get('maxScore')?.hasError('required')">
+            Максимальный балл обязателен
+          </mat-error>
+          <mat-error *ngIf="assignmentForm.get('maxScore')?.hasError('min')">
+            Балл должен быть больше 0
+          </mat-error>
+        </mat-form-field>
+        <div class="form-actions">
+          <button mat-button type="button" (click)="onCancel()" [disabled]="submitting">Отмена</button>
+          <button mat-raised-button color="primary" type="submit" [disabled]="assignmentForm.invalid || submitting">
+            {{ submitting ? 'Создание...' : 'Создать задание' }}
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div> 

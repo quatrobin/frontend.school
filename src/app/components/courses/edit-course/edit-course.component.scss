@@ -1,0 +1,41 @@
+.edit-course-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+}
+.edit-course-card {
+  padding: 24px;
+}
+mat-card-header {
+  margin-bottom: 24px;
+}
+mat-card-title {
+  font-size: 24px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 8px;
+}
+mat-card-subtitle {
+  color: #666;
+  font-size: 16px;
+}
+.full-width {
+  width: 100%;
+}
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid #eee;
+}
+@media (max-width: 768px) {
+  .edit-course-container {
+    padding: 16px;
+  }
+  .form-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+} 

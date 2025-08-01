@@ -1,0 +1,88 @@
+<div class="books-container">
+  <div class="books-header">
+    <h1>Библиотека книг</h1>
+    <p>Найдите необходимую литературу для ваших курсов</p>
+    
+    <div class="header-actions" *ngIf="isTeacher">
+      <button mat-raised-button color="primary" (click)="createBook()">
+        <mat-icon>add</mat-icon>
+        Добавить книгу
+      </button>
+    </div>
+  </div>
+
+  <div class="books-content">
+    <div *ngIf="loading" class="loading-container">
+      <mat-spinner></mat-spinner>
+      <p>Загрузка книг...</p>
+    </div>
+
+    <div *ngIf="!loading && books.length === 0" class="empty-state">
+      <mat-icon>library_books</mat-icon>
+      <h3>Книги не найдены</h3>
+      <p>В библиотеке пока нет книг. Преподаватели могут добавить литературу для курсов.</p>
+    </div>
+
+    <div *ngIf="!loading && books.length > 0" class="books-grid">
+      <mat-card *ngFor="let book of books" class="book-card">
+        <mat-card-header>
+          <mat-card-title>{{ book.title }}</mat-card-title>
+          <mat-card-subtitle>{{ book.author }}</mat-card-subtitle>
+        </mat-card-header>
+
+        <mat-card-content>
+          <div class="book-info">
+            <div class="book-details">
+              <p *ngIf="book.description" class="book-description">{{ book.description }}</p>
+              
+              <div class="book-meta">
+                <span *ngIf="book.publicationYear" class="meta-item">
+                  <mat-icon>calendar_today</mat-icon>
+                  {{ book.publicationYear }}
+                </span>
+                
+                <span *ngIf="book.pages" class="meta-item">
+                  <mat-icon>pages</mat-icon>
+                  {{ book.pages }} стр.
+                </span>
+                
+                <span *ngIf="book.language" class="meta-item">
+                  <mat-icon>language</mat-icon>
+                  {{ book.language }}
+                </span>
+              </div>
+
+              <div *ngIf="book.courses.length > 0" class="book-courses">
+                <h4>Курсы:</h4>
+                <mat-chip-set>
+                  <mat-chip *ngFor="let course of book.courses" color="primary" variant="outlined">
+                    {{ course.name }}
+                  </mat-chip>
+                </mat-chip-set>
+              </div>
+            </div>
+          </div>
+        </mat-card-content>
+
+        <mat-card-actions>
+          <button mat-button color="primary" (click)="goToBookDetails(book.id)">
+            <mat-icon>visibility</mat-icon>
+            Подробнее
+          </button>
+          
+          <div *ngIf="isTeacher" class="teacher-actions">
+            <button mat-button color="accent" (click)="editBook(book.id)">
+              <mat-icon>edit</mat-icon>
+              Редактировать
+            </button>
+            
+            <button mat-button color="warn" (click)="deleteBook(book.id)">
+              <mat-icon>delete</mat-icon>
+              Удалить
+            </button>
+          </div>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+</div> 

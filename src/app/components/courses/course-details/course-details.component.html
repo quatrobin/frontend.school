@@ -1,0 +1,59 @@
+<div class="course-details-container">
+  <div *ngIf="loading" class="loading-container">
+    <mat-spinner></mat-spinner>
+    <p>Загрузка курса...</p>
+  </div>
+  <div *ngIf="!loading && course" class="course-details-content">
+    <div class="course-header">
+      <button mat-button (click)="goBack()" class="back-button">
+        <mat-icon>arrow_back</mat-icon>
+        Назад к списку
+      </button>
+      <div *ngIf="isTeacher" class="teacher-actions">
+        <button mat-raised-button color="accent" (click)="editCourse()">
+          <mat-icon>edit</mat-icon>
+          Редактировать
+        </button>
+      </div>
+    </div>
+    <mat-card class="course-card">
+      <mat-card-header>
+        <mat-card-title class="course-title">{{ course.name }}</mat-card-title>
+        <mat-card-subtitle class="course-teacher">Преподаватель: {{ course.teacherName }}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="course-info">
+          <div *ngIf="course.description" class="course-description">
+            <h3>Описание</h3>
+            <p>{{ course.description }}</p>
+          </div>
+          <div class="course-meta">
+            <div class="meta-section">
+              <h3>Статистика</h3>
+              <div class="meta-grid">
+                <div class="meta-item">
+                  <span class="meta-label">Студентов:</span>
+                  <span class="meta-value">{{ course.studentsCount }}</span>
+                </div>
+                <div class="meta-item">
+                  <span class="meta-label">Уроков:</span>
+                  <span class="meta-value">{{ course.lessonsCount }}</span>
+                </div>
+                <div class="meta-item">
+                  <span class="meta-label">Создан:</span>
+                  <span class="meta-value">{{ course.createdAt | date:'dd.MM.yyyy' }}</span>
+                </div>
+                <div class="meta-item">
+                  <span class="meta-label">Статус:</span>
+                  <span class="meta-value" [class]="course.isActive ? 'status-active' : 'status-inactive'">
+                    {{ course.isActive ? 'Активен' : 'Неактивен' }}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div> 

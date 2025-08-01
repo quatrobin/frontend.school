@@ -1,0 +1,98 @@
+<div class="book-details-container">
+  <div *ngIf="loading" class="loading-container">
+    <mat-spinner></mat-spinner>
+    <p>Загрузка книги...</p>
+  </div>
+
+  <div *ngIf="!loading && book" class="book-details-content">
+    <div class="book-header">
+      <button mat-button (click)="goBack()" class="back-button">
+        <mat-icon>arrow_back</mat-icon>
+        Назад к списку
+      </button>
+      
+      <div *ngIf="isTeacher" class="teacher-actions">
+        <button mat-raised-button color="accent" (click)="editBook()">
+          <mat-icon>edit</mat-icon>
+          Редактировать
+        </button>
+        <button mat-raised-button color="warn" (click)="deleteBook()">
+          <mat-icon>delete</mat-icon>
+          Удалить
+        </button>
+      </div>
+    </div>
+
+    <mat-card class="book-card">
+      <mat-card-header>
+        <mat-card-title class="book-title">{{ book.title }}</mat-card-title>
+        <mat-card-subtitle class="book-author">{{ book.author }}</mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content>
+        <div class="book-info">
+          <div *ngIf="book.description" class="book-description">
+            <h3>Описание</h3>
+            <p>{{ book.description }}</p>
+          </div>
+
+          <div class="book-meta">
+            <div class="meta-section">
+              <h3>Основная информация</h3>
+              <div class="meta-grid">
+                <div class="meta-item" *ngIf="book.isbn">
+                  <span class="meta-label">ISBN:</span>
+                  <span class="meta-value">{{ book.isbn }}</span>
+                </div>
+                
+                <div class="meta-item">
+                  <span class="meta-label">Год издания:</span>
+                  <span class="meta-value">{{ book.publicationYear }}</span>
+                </div>
+                
+                <div class="meta-item" *ngIf="book.publisher">
+                  <span class="meta-label">Издательство:</span>
+                  <span class="meta-value">{{ book.publisher }}</span>
+                </div>
+                
+                <div class="meta-item">
+                  <span class="meta-label">Количество страниц:</span>
+                  <span class="meta-value">{{ book.pages }}</span>
+                </div>
+                
+                <div class="meta-item" *ngIf="book.language">
+                  <span class="meta-label">Язык:</span>
+                  <span class="meta-value">{{ book.language }}</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="meta-section">
+              <h3>Системная информация</h3>
+              <div class="meta-grid">
+                <div class="meta-item">
+                  <span class="meta-label">Дата создания:</span>
+                  <span class="meta-value">{{ formatDate(book.createdAt) }}</span>
+                </div>
+                
+                <div class="meta-item">
+                  <span class="meta-label">Дата обновления:</span>
+                  <span class="meta-value">{{ formatDate(book.updatedAt) }}</span>
+                </div>
+              </div>
+            </div>
+
+            <div *ngIf="book.courses.length > 0" class="meta-section">
+              <h3>Связанные курсы</h3>
+              <mat-chip-set>
+                <mat-chip *ngFor="let course of book.courses" color="primary" variant="outlined">
+                  {{ course.name }}
+                </mat-chip>
+              </mat-chip-set>
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div> 

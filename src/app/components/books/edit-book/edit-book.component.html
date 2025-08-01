@@ -1,0 +1,131 @@
+<div class="edit-book-container">
+  <div *ngIf="loading" class="loading-container">
+    <mat-spinner></mat-spinner>
+    <p>Загрузка книги...</p>
+  </div>
+
+  <mat-card *ngIf="!loading && book" class="edit-book-card">
+    <mat-card-header>
+      <mat-card-title>Редактировать книгу</mat-card-title>
+      <mat-card-subtitle>Обновите информацию о книге "{{ book.title }}"</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <form [formGroup]="bookForm" (ngSubmit)="onSubmit()">
+        <div class="form-row">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Название книги *</mat-label>
+            <input matInput formControlName="title" placeholder="Введите название книги">
+            <mat-error *ngIf="bookForm.get('title')?.hasError('required')">
+              Название книги обязательно
+            </mat-error>
+            <mat-error *ngIf="bookForm.get('title')?.hasError('maxlength')">
+              Название не должно превышать 200 символов
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="form-row">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Автор *</mat-label>
+            <input matInput formControlName="author" placeholder="Введите автора">
+            <mat-error *ngIf="bookForm.get('author')?.hasError('required')">
+              Автор обязателен
+            </mat-error>
+            <mat-error *ngIf="bookForm.get('author')?.hasError('maxlength')">
+              Имя автора не должно превышать 100 символов
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="form-row">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Описание</mat-label>
+            <textarea matInput formControlName="description" rows="3" placeholder="Введите описание книги"></textarea>
+            <mat-error *ngIf="bookForm.get('description')?.hasError('maxlength')">
+              Описание не должно превышать 500 символов
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="form-row two-columns">
+          <mat-form-field appearance="outline">
+            <mat-label>ISBN</mat-label>
+            <input matInput formControlName="isbn" placeholder="Введите ISBN">
+            <mat-error *ngIf="bookForm.get('isbn')?.hasError('maxlength')">
+              ISBN не должен превышать 50 символов
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Год издания *</mat-label>
+            <input matInput type="number" formControlName="publicationYear" placeholder="Год">
+            <mat-error *ngIf="bookForm.get('publicationYear')?.hasError('required')">
+              Год издания обязателен
+            </mat-error>
+            <mat-error *ngIf="bookForm.get('publicationYear')?.hasError('min') || bookForm.get('publicationYear')?.hasError('max')">
+              Год должен быть между 1800 и {{ getCurrentYear() }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="form-row two-columns">
+          <mat-form-field appearance="outline">
+            <mat-label>Издательство</mat-label>
+            <input matInput formControlName="publisher" placeholder="Введите издательство">
+            <mat-error *ngIf="bookForm.get('publisher')?.hasError('maxlength')">
+              Название издательства не должно превышать 100 символов
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Количество страниц *</mat-label>
+            <input matInput type="number" formControlName="pages" placeholder="Количество">
+            <mat-error *ngIf="bookForm.get('pages')?.hasError('required')">
+              Количество страниц обязательно
+            </mat-error>
+            <mat-error *ngIf="bookForm.get('pages')?.hasError('min')">
+              Количество страниц должно быть больше 0
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="form-row">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Язык</mat-label>
+            <input matInput formControlName="language" placeholder="Введите язык">
+            <mat-error *ngIf="bookForm.get('language')?.hasError('maxlength')">
+              Название языка не должно превышать 20 символов
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="form-row" *ngIf="!loadingCourses">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Курсы</mat-label>
+            <mat-select formControlName="courseIds" multiple placeholder="Выберите курсы">
+              <mat-option *ngFor="let course of courses" [value]="course.id">
+                {{ course.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div *ngIf="loadingCourses" class="loading-courses">
+          <mat-spinner diameter="20"></mat-spinner>
+          <span>Загрузка курсов...</span>
+        </div>
+
+        <div class="form-actions">
+          <button mat-button type="button" (click)="onCancel()" [disabled]="submitting">
+            Отмена
+          </button>
+          <button mat-raised-button color="primary" type="submit" 
+                  [disabled]="bookForm.invalid || submitting">
+            {{ submitting ? 'Обновление...' : 'Обновить книгу' }}
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div> 

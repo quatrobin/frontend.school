@@ -1,0 +1,65 @@
+<div class="courses-container">
+  <div class="courses-header">
+    <h1>Курсы</h1>
+    <button mat-raised-button color="primary" (click)="createCourse()" *ngIf="isTeacher">
+      <mat-icon>add</mat-icon>
+      Создать курс
+    </button>
+  </div>
+
+  <div class="loading-container" *ngIf="loading">
+    <mat-spinner></mat-spinner>
+    <p>Загрузка курсов...</p>
+  </div>
+
+  <div class="courses-grid" *ngIf="!loading">
+    <mat-card class="course-card" *ngFor="let course of courses">
+      <mat-card-header>
+        <mat-card-title>{{ course.name }}</mat-card-title>
+        <mat-card-subtitle>Преподаватель: {{ course.teacherName }}</mat-card-subtitle>
+      </mat-card-header>
+      
+      <mat-card-content>
+        <p class="course-description">{{ course.description || 'Описание отсутствует' }}</p>
+        
+        <div class="course-stats">
+          <mat-chip color="primary" selected>
+            <mat-icon>people</mat-icon>
+            {{ course.studentsCount }} студентов
+          </mat-chip>
+          <mat-chip color="accent" selected>
+            <mat-icon>book</mat-icon>
+            {{ course.lessonsCount }} уроков
+          </mat-chip>
+        </div>
+        
+        <div class="course-meta">
+          <p><strong>Создан:</strong> {{ course.createdAt | date:'dd.MM.yyyy' }}</p>
+          <p><strong>Статус:</strong> 
+            <span [class]="course.isActive ? 'status-active' : 'status-inactive'">
+              {{ course.isActive ? 'Активен' : 'Неактивен' }}
+            </span>
+          </p>
+        </div>
+      </mat-card-content>
+      
+      <mat-card-actions>
+        <button mat-button (click)="goToCourseDetails(course.id)">
+          <mat-icon>visibility</mat-icon>
+          Подробнее
+        </button>
+        <button mat-raised-button color="primary" (click)="enrollInCourse(course.id)" 
+                *ngIf="!isTeacher">
+          <mat-icon>school</mat-icon>
+          Записаться
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+
+  <div class="no-courses" *ngIf="!loading && courses.length === 0">
+    <mat-icon>book</mat-icon>
+    <h2>Курсы не найдены</h2>
+    <p>Пока нет доступных курсов.</p>
+  </div>
+</div> 
