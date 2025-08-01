@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  frontend-school:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:80"
+    container_name: frontend-school
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+    volumes:
+      # Для разработки можно добавить volume для hot reload
+      # - ./src:/app/src:ro
+      - ./logs/nginx:/var/log/nginx
+    networks:
+      - frontend-network
+
+  # Опционально: контейнер для разработки
+  frontend-school-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "4200:4200"
+    container_name: frontend-school-dev
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=development
+    volumes:
+      - ./src:/app/src
+      - ./package.json:/app/package.json
+      - ./angular.json:/app/angular.json
+      - ./tsconfig.json:/app/tsconfig.json
+    networks:
+      - frontend-network
+    profiles:
+      - dev
+
+networks:
+  frontend-network:
+    driver: bridge 

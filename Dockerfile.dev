@@ -1,0 +1,23 @@
+# Dockerfile для разработки
+FROM node:20-alpine
+
+# Установка рабочей директории
+WORKDIR /app
+
+# Установка Angular CLI глобально
+RUN npm install -g @angular/cli
+
+# Копирование файлов зависимостей
+COPY package*.json ./
+
+# Установка зависимостей
+RUN npm install
+
+# Копирование исходного кода
+COPY . .
+
+# Открытие порта для Angular dev server
+EXPOSE 4200
+
+# Запуск Angular dev server
+CMD ["ng", "serve", "--host", "0.0.0.0", "--port", "4200", "--poll", "2000"] 
