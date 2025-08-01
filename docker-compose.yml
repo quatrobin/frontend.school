@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   frontend-school:
     build:
@@ -12,8 +10,6 @@ services:
     environment:
       - NODE_ENV=production
     volumes:
-      # Для разработки можно добавить volume для hot reload
-      # - ./src:/app/src:ro
       - ./logs/nginx:/var/log/nginx
     networks:
       - frontend-network
