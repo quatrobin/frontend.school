@@ -92,4 +92,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
   goToProfile(): void {
     this.router.navigate(['/profile']);
   }
+
+  onOverlayClick(): void {
+    this.closeMobileMenu();
+  }
 } 
