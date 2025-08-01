@@ -65,7 +65,7 @@ export class AuthService {
   }
 
   getRoles(): Observable<BaseResponse<Role[]>> {
-    return this.http.get<BaseResponse<Role[]>>(`${environment.apiUrl}/role`);
+    return this.http.get<BaseResponse<Role[]>>(`${this.apiUrl}/role`);
   }
 
   getToken(): string | null {
