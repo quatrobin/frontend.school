@@ -61,14 +61,15 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    // Убрал unsubscribe - утечка памяти
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   loadProfile(): void {
     this.loading = true;
     this.cdr.detectChanges();
     
-    this.authService.getProfile().subscribe({
+    this.authService.getProfile().pipe(takeUntil(this.destroy$)).subscribe({
       next: (response) => {
         if (response.success && response.data) {
           this.currentUser = response.data;
