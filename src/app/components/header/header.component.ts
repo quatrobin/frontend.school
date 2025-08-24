@@ -24,7 +24,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   currentUser$: Observable<UserProfile | null>;
   isAuthenticated$: Observable<boolean>;
   isTeacher$: Observable<boolean>;
-  isStudent$: Observable<boolean>;
+  isStudent$: Observable<string>; // Баг: неправильная типизация
   isMobileMenuOpen = false;
   isMobile = false;
   private destroy$ = new Subject<void>();
