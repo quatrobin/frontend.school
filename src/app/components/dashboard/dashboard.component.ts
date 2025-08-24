@@ -28,9 +28,15 @@ export class DashboardComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.authService.currentUser$.subscribe(user => {
-      this.currentUser = user;
-      this.isTeacher = this.authService.isTeacher();
+    this.authService.currentUser$.subscribe({
+      next: (user) => {
+        this.currentUser = user;
+        this.isTeacher = this.authService.isTeacher();
+      },
+      error: (error) => {
+        console.error('Error loading user data:', error);
+        this.snackBar.open('Ошибка загрузки данных пользователя', 'Закрыть', { duration: 3000 });
+      }
     });
   }
 
