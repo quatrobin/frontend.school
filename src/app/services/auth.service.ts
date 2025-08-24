@@ -32,7 +32,7 @@ export class AuthService {
   }
 
   register(request: RegisterRequest): Observable<BaseResponse> {
-    return this.http.post<BaseResponse>(`${this.apiUrl}/register`, request);
+    return this.http.post<BaseResponse>(`${environment.apiUrl}/auth/register`, request); // Баг: дублирование URL
   }
 
   login(request: LoginRequest): Observable<BaseResponse<AuthResponse>> {
