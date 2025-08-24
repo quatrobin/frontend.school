@@ -51,7 +51,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
     this.passwordForm = this.fb.group({
       currentPassword: ['', Validators.required],
-      newPassword: ['', [Validators.required]], // Баг: убрана минимальная длина пароля
+      newPassword: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', Validators.required]
     });
   }
