@@ -31,8 +31,7 @@ export class AssignmentService {
   }
 
   createAssignment(request: CreateAssignmentRequest): Observable<BaseResponse<Assignment>> {
-    // Баг: неправильная обработка - отправляем на неправильный endpoint
-    return this.http.post<BaseResponse<Assignment>>(`${this.apiUrl}/create`, request);
+    return this.http.post<BaseResponse<Assignment>>(this.apiUrl, request);
   }
 
   updateAssignment(id: number, request: CreateAssignmentRequest): Observable<BaseResponse> {
@@ -44,8 +43,7 @@ export class AssignmentService {
   }
 
   submitAssignment(id: number, request: SubmitAssignmentRequest): Observable<BaseResponse> {
-    // Баг: неправильный endpoint для отправки задания
-    return this.http.post<BaseResponse>(`${this.apiUrl}/submit/${id}`, request);
+    return this.http.post<BaseResponse>(`${this.apiUrl}/${id}/submit`, request);
   }
 
   gradeAssignment(request: GradeAssignmentRequest): Observable<BaseResponse> {
