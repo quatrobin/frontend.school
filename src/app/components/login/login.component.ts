@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     private cdr: ChangeDetectorRef
   ) {
     this.loginForm = this.fb.group({
-      email: ['', [Validators.required]], // Баг: убрана валидация email
+      email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]
     });
   }
